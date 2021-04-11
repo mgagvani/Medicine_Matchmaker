@@ -1,0 +1,51 @@
+{% extends "nav.html" %}
+{% block content %}
+   <div class="signup">
+     <h1>Sign up here!</h1>
+     <p>Sign up for medicine exchange
+     </p>
+     <form action="/register/" method="post">
+        <label for="zip">Zipcode:</label>
+        <input type="text" id="zip" name="zip"><br><br>
+        <label for="Email">Email:</label>
+        <input type="text" id="Email" name="Email"><br><br>
+        <input type="checkbox" id="Donor" name="Donor" value="Donor">
+        <label for="donorBool">I want to donate medicines (leave unchecked if you want to recieve medicines): </label><br>
+        <label for="medicine">Choose a medicine:</label>
+        <select name="medicine" id="medicine">
+            <option value="Laughter">Laughter</option>
+            <option value="Tylenol">Tylenol</option>
+            <option value="Ibuprofen">Ibuprofen</option>
+            <option value="Coughsyrup">Cough syrup</option>
+            <option value="Nexium">Nexium</option>
+            <option value="Advil">Advil</option>
+            <option value="Claritin">Claritin</option>
+            <option value="Zantac">Zantac</option>
+            <option value="Isopropylalcohol">Isopropyl alcohol</option>
+            <option value="Hydrogenperoxide">Hydrogen peroxide</option>
+            <option value="PeptoBismol">Pepto bismol</option>
+            <option value="Robitussin">Robitussin</option>
+            <option value="Robitussin">Robitussin</option>
+            <option value="MiraLAX">MiraLAX</option>
+            <option value="MilkofMagnesia">Milk of Magnesia</option>
+        </select>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <label>You submitted:</label>
+    <ol>
+
+
+    {% for item in seq %}
+    <li>{{ item }}</li>
+    {% endfor %}
+    </ol>
+    <h1>Here are matching users:</h1>
+     <p>
+     {{ output }}
+     </p>
+
+
+   </div>
+ {% endblock %}
