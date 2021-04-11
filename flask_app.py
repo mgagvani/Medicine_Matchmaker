@@ -1,5 +1,7 @@
 
-# A very simple Flask Hello World app for you to get started with...
+# Medicine Matchmaker
+# By Manav Gagvani and Kiran Donnelly
+# For HackTJ 8.0
 
 from flask import Flask, request
 from flask import render_template
@@ -62,8 +64,12 @@ def find_matches(email,location,medicines,donor):
 
     matches = sorted(matches,key=lambda l:l[-1], reverse=False)
 
+
     if len(matches) < 1:
         matches = ["Sorry, we did not find any matching users."]
+    else:
+        while matches[0]["Email"] == email:
+            del(matches[0])
 
     g.write(str(matches))
     g.close()
@@ -114,8 +120,10 @@ def need_input():
         {%endfor%}
     </table>
             """
-    if (len(matches)==0):
-        output="Sorry. Nobody matches with you."
+    if len(matches) < 1 and seq[2] == "Donor":
+        output="Sorry. We did not find any matching recipients. We have entered your information in our database so that it can be used in the future."
+    elif len(matches) < 1 and seq[2] == "Recipient":
+        output="Sorry. We did not find any matching donors. Check back later to see if anyone has the medicine you want."
     else:
         output = f"The user who most closely matches you is {matches[0]['Email']}. \n The user lives in {seq[0]},which is only {matches[0]['Distance']} miles away from you. \n Now you can contact the user and find out your pickup/dropoff location!"
 
@@ -138,7 +146,7 @@ def find_distance(location1, location2):
         location2_int *=10
         for d in '0123456789':
             location2_int += digit > d
-    location2 = str(location2_int)[:-2]
+    location2 = str(location2_int)#[:-2]
 
     g=open("txt.txt","r+")
     g1 = geocoder.mapbox(location1,key=key)
