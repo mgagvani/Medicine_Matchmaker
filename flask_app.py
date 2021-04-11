@@ -66,12 +66,14 @@ def find_matches(email,location,medicines,donor):
 
 
     if len(matches) < 1:
-        matches = []
+        pass
     else:
         try:
             while matches[0]["Email"] == email:
+                g.write(f"email email equals -- {email} {matches[0]['Email']} \n")
                 del(matches[0])
-            while matches[0]["Donor?"] == str(donor) or donor:
+            while matches[0]["Donor?"] == str(donor) or matches[0]["Donor?"] == donor:
+                g.write(f"donor donor equals -- {donor} {matches[0]['Donor?']} \n")
                 del(matches[0])
         except:
             #nothing there
