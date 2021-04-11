@@ -125,7 +125,7 @@ def need_input():
     elif len(matches) < 1 and seq[2] == "Recipient":
         output="Sorry. We did not find any matching donors. Check back later to see if anyone has the medicine you want."
     else:
-        output = f"The user who most closely matches you is {matches[0]['Email']}. \n The user lives in {seq[0]},which is only {matches[0]['Distance']} miles away from you. \n Now you can contact the user and find out your pickup/dropoff location!"
+        output = f"The user who most closely matches you is {matches[0]['Email']}. \n The user lives in {matches[0]['Location']},which is only {matches[0]['Distance']} miles away from you. \n Now you can contact the user and find out your pickup/dropoff location!"
 
 
     g.write(f" \n length of matches is {len(matches)} \n")
